@@ -1,4 +1,4 @@
-These instructions will get you up and running doing radio data anlysis with [CASA](https://casa.nrao.edu/) in a [Jupyter Notebook](http://jupyter.org/) (using [this](https://github.com/aardk/jupyter-casa) container) via [Singularity](https://www.sylabs.io/) on a Mac.
+These instructions will get you up and running doing radio data anlysis with [CASA](https://casa.nrao.edu/) in a [Jupyter Notebook](http://jupyter.org/) (using [this](https://github.com/aardk/jupyter-casa) container) via [Singularity](https://www.sylabs.io/) on a Mac. (For Linux, follow the [original instructions](https://github.com/aardk/jupyter-casa).)
 
 ---
 
