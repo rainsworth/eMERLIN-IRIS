@@ -33,8 +33,8 @@ jdl += 'JobName = "MERLIN_IRIS_test";\n'
 jdl += 'Site = "LCG.UKI-NORTHGRID-MAN-HEP.uk";\n'	# in GridPP DIRAC
 jdl += 'OutputSE = "UKI-NORTHGRID-MAN-HEP-disk";\n'
 jdl += 'Tags = "8Processors";\n'
-jdl += 'GridCE = "vm3.tier2.hep.manchester.ac.uk";\n'
-#jdl += 'GridCE = "ce01.tier2.hep.manchester.ac.uk";\n'
+jdl += 'GridCE = "ce01.tier2.hep.manchester.ac.uk";\n'  # IRIS
+#jdl += 'GridCE = "vm3.tier2.hep.manchester.ac.uk";\n'
 
 #jdl += 'Site = "LCG.Manchester.uk";\n'			# in LHCb DIRAC
 #jdl += 'Site = "VAC.UKI-NORTHGRID-MAN-HEP.uk";\n'	# in GridPP DIRAC
