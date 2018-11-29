@@ -26,22 +26,17 @@ which casa
 echo "python location on grid:"
 which python
 
-echo "move data and notebook into data folder:"
-tar xvzf 3C277.1_eMERLIN.tar.gz
+tar -xvzf 3C277.1_eMERLIN.tar.gz
 mv eMERLIN_CASA_Pipeline_clean.ipynb data/
 mv inputs.txt data/
 
-echo "download the CASA eMERLIN Pipeline:"
-git clone https://github.com/e-merlin/CASA_eMERLIN_pipeline.git
+git clone https://github.com/e-merlin/eMERLIN_CASA_pipeline.git
 
-echo "download the jupyter-casa image:"
 singularity pull --name jupyter-casa.simg shub://aardk/jupyter-casa:docker
 
-#echo "printenv in the container:"
-#singularity exec --cleanenv -H $PWD -B data/:$HOME/data -B CASA_eMERLIN_pipeline/:$HOME/pipeline jupyter-casa.simg printenv
+echo "printenv in the container: "
+singularity exec --cleanenv -H $PWD -B data/:$HOME/data -B eMERLIN_CASA_pipeline:$HOME/pipeline jupyter-casa.simg printenv
 
-echo "execute the notebook in the container:"
-singularity exec --cleanenv -H $PWD -B data/:$HOME/data -B CASA_eMERLIN_pipeline/:$HOME/pipeline jupyter-casa.simg './runjupyter_eMERLIN_CP.sh'
+singularity exec --cleanenv -H $PWD -B data/:$HOME/data -B eMERLIN_CASA_pipeline:$HOME/pipeline jupyter-casa.simg './runjupyter_eMERLIN_CP.sh'
 
-echo "tar the output:"
 tar -cvf eMERLIN_CP_IRIS_test_output_$3.tar data
