@@ -1,0 +1,8 @@
+[
+JobName = "Simple_Job";
+Executable = "/bin/echo 'Hello World!'";
+Arguments = "-ltr";
+StdOutput = "StdOut";
+StdError = "StdErr";
+OutputSandbox = {"StdOut","StdErr"};
+]
