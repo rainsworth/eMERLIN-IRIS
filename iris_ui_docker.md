@@ -60,3 +60,4 @@ Generating proxy...
 Enter Certificate password:
 ```
 
+**NOTE**: The "Certificate password" they ask for here is actually your PEM pass phrase. Any time you initialise a DIRAC proxy, enter your pass phrase, not your password.
