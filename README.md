@@ -1,2 +1,9 @@
 # eMERLIN @ IRIS
-A project to store, process and analyse (e)MERLIN data on the cloud.
+
+Next generation radio interferometers are confronting formidable technological challenges. Data rates from the [Square Kilometre Array](https://www.skatelescope.org/) (SKA) - a global science and engineering project to build the world's largest radio telescope - will soon overtake those of global Internet traffic, requiring innovation in the way we transport, store and process data. [e-MERLIN](http://www.e-merlin.ac.uk/), the UK’s national radio astronomy facility operated by [Jodrell Bank](http://www.jodrellbank.manchester.ac.uk/), is a pathfinder instrument engaged in SKA related technology and science studies. 
+
+This project involves using e-MERLIN as a testbed for tackling these big data challenges, while also making radio astronomy more accessible to everyone. It will be a service to provide interactive radio data analysis on the cloud using [IRIS](https://www.iris.ac.uk/) resources, inspired by CERN’s Service for Web based Analysis ([SWAN](https://swan.web.cern.ch/)). It will provide archive storage for the large data outputs from e-MERLIN which will comply with FAIR (Findable, Accessible, Interoperable, Reusable) data standards, a [Jupyter Notebook](https://jupyter.org/) interface for accessing and calibrating the data with observatory standard pipelines (which can be adapted/modified by the user), distributed computing for processing via DiRAC, and facilities for sharing and collaborating with other users. 
+
+This project facilitates transparency and reproducibility for radio astronomy - fundamental aspects of the scientific method currently undergoing crisis in research - through the use of containers, open notebooks and open source software developed by the community. Crucially, the provision of computing resources will make the field accessible to those who cannot afford large clusters to manage the large amounts of data. e-MERLIN will become a flagship facility for Open Science.
+
+![](http://www.e-merlin.ac.uk/medialibrary/emerlin3b.png)
