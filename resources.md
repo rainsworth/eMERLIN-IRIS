@@ -3,7 +3,6 @@
 * eMERLIN: http://www.e-merlin.ac.uk/
 * MERLIN: http://www.merlin.ac.uk/
 * eMERLIN CASA Pipeline: https://github.com/e-merlin/eMERLIN_CASA_pipeline
-* Guide on setting up a CASA Jupyter Notebook server: https://github.com/hrampadarath/emerlin-casa-jupyter
 * MERLIN data tutorial: http://www.black-hole.eu/index.php/schools-workshops-and-conferences/2nd-school-on-multiwavelength-astronomy/course-materials/164-merlin-data
 
 ### IRIS
@@ -23,4 +22,5 @@
 * Running LOFAR imaging pipelines inside Docker: https://support.astron.nl/LOFARImagingCookbook/buildlofar.html
 
 ### Notebooks
-* 5 easy steps to start editing python notebooks over SSH http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/
+* Guide on setting up a CASA Jupyter Notebook server: https://github.com/hrampadarath/emerlin-casa-jupyter
+* 5 easy steps to start editing python notebooks over SSH: http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/
