@@ -21,3 +21,6 @@
 * Jupyter kernel for CASA: https://github.com/aardk/jupyter-casa, http://repository.asterics2020.eu/content/casa-jupyter-kernel
 * User interface Docker container for IRIS: https://github.com/iris-ac-uk/iris-ui, https://hub.docker.com/r/irisacuk/iris-ui/
 * Running LOFAR imaging pipelines inside Docker: https://support.astron.nl/LOFARImagingCookbook/buildlofar.html
+
+### Notebooks
+* 5 easy steps to start editing python notebooks over SSH http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/
