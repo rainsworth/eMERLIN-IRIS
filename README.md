@@ -38,6 +38,10 @@ There are two example directories in this repository for submitting jobs to redu
 2. [MERLIN_IRIS_test](https://github.com/rainsworth/eMERLIN-IRIS/tree/master/MERLIN_IRIS_test) which demonstrates submitting a MERLIN test notebook to IRIS.
 
 
+## Reproducible radio data analysis
+
+This repo also contains instructions to get you up and running doing radio data anlysis with CASA in a Jupyter Notebook (using [this container](https://github.com/aardk/jupyter-casa)) locally via [Singularity on a Mac](https://github.com/rainsworth/eMERLIN-IRIS/blob/master/singularity_mac.md) or via [Docker on a Mac](https://github.com/rainsworth/eMERLIN-IRIS/blob/master/docker_mac.md). (For Linux, follow the [original instructions](https://github.com/aardk/jupyter-casa).)
+
 ---
 
 *This project repository is under construction. Apologies for incompleteness, but please submit an issue or pull request if you would like to contribute or make suggestions!*
