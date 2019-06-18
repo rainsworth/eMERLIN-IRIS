@@ -1,0 +1,117 @@
+#!/usr/bin/env python
+#
+# Template for submitting lots of jobs to GridPP DIRAC or LHCb DIRAC
+# Lots of inline comments. Please edit to suit your situation.
+#
+# This script uses DIRAC parametric jobs:
+#  https://github.com/DIRACGrid/DIRAC/wiki/JobManagementAdvanced
+
+import sys
+import time
+
+from DIRAC.Core.Base import Script
+Script.parseCommandLine()
+
+from DIRAC.Core.Security.ProxyInfo import getProxyInfo
+from DIRAC.Interfaces.API.Dirac import Dirac
+
+# We construct the DIRAC Job Description Language as string in jdl:
+jdl = ''
+
+# Something descriptive for the name! Like 'FastRawMerging'.
+jdl += 'JobName = "eMERLIN_IRIS_test_parametric_multicore";\n'
+
+# One job will be created for each parameter in the list
+# Parameters can be numbers defined with a start, step, and total count 
+#jdl += "Parameters = 10;\n"
+#jdl += "ParameterStart=1;\n"
+#jdl += "ParameterStep=1;\n"
+
+# Alternatively parameters can also be a list of LFNs for use cases that want to run the same workflow on a set of different files
+# For demonstration purposes, we have used the same LFN 5 times. 
+# Submitting this one script to DIRAC will kick off 5 jobs, one for each value in the list of Parameters 
+jdl += """Parameters = {"LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/3C277.1_eMERLIN.tar.gz",
+"LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/3C277.1_eMERLIN.tar.gz",
+"LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/3C277.1_eMERLIN.tar.gz",
+"LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/3C277.1_eMERLIN.tar.gz",
+"LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/3C277.1_eMERLIN.tar.gz"};\n"""
+
+# Run the job at Manchester
+#jdl += 'Site = "LCG.UKI-NORTHGRID-MAN-HEP.uk";\n'	# in GridPP DIRAC
+#jdl += 'Site = "LCG.UKI-LT2-IC-HEP.uk";\n'	# in GridPP DIRAC
+
+# Allows job to run on local queues (must correspond to tags in DIRAC CS!)
+jdl += 'Tags = "8Processors";\n'
+
+jdl += 'Platform = "EL7";\n'
+
+# The script you want to run.
+jdl += 'Executable = "eMERLIN.sh";\n'
+
+# %n is a counter increasing by one for each job in the list
+# %s is the parameter taken from the list given in Parameters = { ... }
+# In this case, it will be LFNs. 
+# %j is the unique DIRAC Job ID number
+# something is just a value to show you can add other things too
+jdl += 'Arguments = "%n %s %j something";\n'
+
+# Send the script you want to run (in this directory where you run job-submit-*
+# or give the full path to it)
+jdl += """InputSandbox = { "eMERLIN.sh", "runjupyter_eMERLIN_CP.sh", "inputs.txt", "LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/CASA_eMERLIN_pipeline.tar.gz", 
+"LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/eMERLIN_CASA_Pipeline_clean.ipynb" };\n"""
+#jdl += """InputSandbox = { "eMERLIN.sh", "runjupyter_eMERLIN_CP.sh", "inputs.txt", "LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/CASA_eMERLIN_pipeline.tar.gz", 
+#"LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/eMERLIN_CASA_Pipeline_clean.ipynb", "LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/3C277.1_eMERLIN.tar.gz"};\n"""
+
+# Tell DIRAC where to get your big input data files from
+# %s is the parameter taken from the list given in Parameters = { ... }
+jdl += 'InputData = "%s";\n'
+
+# Direct stdout and stderr to files
+jdl += 'StdOutput = "StdOut";\n';
+jdl += 'StdError = "StdErr";\n';
+
+# Small files can be put in the output sandbox
+jdl += 'OutputSandbox = {"StdOut", "StdErr"};\n'
+
+# Files to be saved to your grid storage area in case they are large
+# %j is the unique DIRAC Job ID number.
+# DIRAC looks for this output file in the working directory.
+jdl += 'OutputData = "LFN:/skatelescope.eu/user/r/rachael.ainsworth/eMERLIN_CP_IRIS_test/eMERLIN_CP_IRIS_test_output_%j.tar";\n'
+jdl += 'OutputSE = "UKI-NORTHGRID-MAN-HEP-disk";\n'
+
+# Tell DIRAC how many seconds your job might run for
+jdl += 'MaxCPUTime = 1000;\n'
+
+# Create a unique Job Group for this set of jobs
+try:
+  diracUsername = getProxyInfo()['Value']['username']
+except:
+  print 'Failed to get DIRAC username. No proxy set up?'
+  sys.exit(1)
+
+jobGroup = diracUsername + time.strftime('.%Y%m%d%H%M%S')
+jdl += 'JobGroup = "' + jobGroup + '";\n'
+
+print 'Will submit this DIRAC JDL:'
+print '====='
+print jdl
+print '====='
+print
+# Submit the job(s)
+print 'Attempting to submit job(s) in JobGroup ' + jobGroup
+print
+dirac = Dirac()
+result = dirac.submit(jdl)
+print
+print '====='
+print
+print 'Submission Result: ',result
+print
+print '====='
+print
+
+if result['OK']:
+  print 'Retrieve output with  dirac-wms-job-get-output --JobGroup ' + jobGroup
+else:
+  print 'There was a problem submitting your job(s) - see above!!!'
+print
