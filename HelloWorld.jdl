@@ -1,8 +1,8 @@
-[
-JobName = "Simple_Job";
-Executable = "/bin/echo 'Hello World!'";
-Arguments = "-ltr";
-StdOutput = "StdOut";
-StdError = "StdErr";
-OutputSandbox = {"StdOut","StdErr"};
-]
+JobName = "Hello World";
+Executable = "/bin/echo";
+Platform = "EL7";
+Arguments = "'Hello World'";
+StdOutput = "std.out";
+StdError = "std.err";
+OutputSandbox = {"std.out","std.err"};
+CPUTime = 100;
